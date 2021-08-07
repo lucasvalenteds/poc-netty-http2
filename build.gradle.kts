@@ -29,3 +29,13 @@ tasks.withType<Test> {
         events = setOf(TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED)
     }
 }
+
+tasks.register<JavaExec>("runClient") {
+    classpath(sourceSets["main"].runtimeClasspath)
+    mainClass.set("com.example.ClientExample")
+}
+
+tasks.register<JavaExec>("runServer") {
+    classpath(sourceSets["main"].runtimeClasspath)
+    mainClass.set("com.example.ServerExample")
+}
