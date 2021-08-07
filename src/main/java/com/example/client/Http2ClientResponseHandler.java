@@ -5,15 +5,25 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http2.HttpConversionUtil;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public final class Http2ClientResponseHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
 
+    private static final Logger logger = LoggerFactory.getLogger(Http2ClientResponseHandler.class);
+
     private final Http2ClientStreamManager requestManager;
 
     public Http2ClientResponseHandler(Http2ClientStreamManager requestManager) {
         this.requestManager = requestManager;
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        logger.error("Error while handling response", cause);
+        ctx.close();
     }
 
     @Override
