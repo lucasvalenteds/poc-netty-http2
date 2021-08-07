@@ -13,6 +13,8 @@ dependencies {
     implementation("org.apache.logging.log4j", "log4j-core", properties["version.log4j"].toString())
     implementation("org.slf4j", "slf4j-simple", properties["version.slf4j"].toString())
 
+    implementation("io.netty", "netty-codec-http2", properties["version.netty"].toString())
+
     testImplementation("org.junit.jupiter", "junit-jupiter", properties["version.junit"].toString())
 }
 
